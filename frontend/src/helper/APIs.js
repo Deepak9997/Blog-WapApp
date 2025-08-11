@@ -1,5 +1,5 @@
 export function getApiBaseUrl() {
-  return "http://localhost:3000/api";
+  return "https://blog-wapapp-1.onrender.com/api";
 }
 export function VITE_FIREBASE_API() {
   return "AIzaSyBI4g2CknNia_iOWq7nQsYzAJ4ocPyKCdY";
