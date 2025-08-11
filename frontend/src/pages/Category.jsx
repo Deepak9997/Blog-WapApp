@@ -39,7 +39,7 @@ const Category = () => {
  console.log(Categorydata)
   const handleDelete = async (id) => {
     const response = HandleDelete(
-      `${getEnv("VITE_API_BASE_URL")}/category/delete/${id}`
+      `${getApiBaseUrl()}/category/delete/${id}`
     );
     if (response) {
       setrefreshData(!refreshData);
