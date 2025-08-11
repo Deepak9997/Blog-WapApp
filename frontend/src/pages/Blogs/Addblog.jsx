@@ -99,7 +99,7 @@ const Addblog = () => {
       formData.append("file", file);
       formData.append("data", JSON.stringify(newValues));
       console.log(newValues)
-      const response = await fetch(`${getEnv("VITE_API_BASE_URL")}/blog/add`, {
+      const response = await fetch(`${getApiBaseUrl()}/blog/add`, {
         method: "POST",
         credentials: "include",
         body: formData,

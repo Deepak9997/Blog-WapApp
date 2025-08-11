@@ -72,7 +72,7 @@ const EditCategory = () => {
   async function onSubmit(values) {
     try {
         const response = await fetch(
-          `${getEnv("VITE_API_BASE_URL")}/category/update/${category_id}`,
+          `${getApiBaseUrl()}/category/update/${category_id}`,
           {
             method: "put",
             headers:{'Content-type': 'application/json'},
