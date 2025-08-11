@@ -57,7 +57,7 @@ const Editblog = () => {
   },[blog_id]);
 
 //  console.log(BlogData?.blog.category)
-console.log(BlogData?.blog)
+console.log(BlogData)
 
   const formSchema = z.object({
     author: z.string(),
@@ -81,7 +81,7 @@ console.log(BlogData?.blog)
   });
 
 useEffect(() => {
-  if (BlogData) {
+  if (BlogData && Categorydata?.category?.length > 0) {
     setPriview(BlogData?.blog?.filecontent)
       form.setValue('category', BlogData?.blog?.category._id),
       form.setValue('title', BlogData?.blog.title),
@@ -89,7 +89,7 @@ useEffect(() => {
       form.setValue('filecontent', filePriview),
       form.setValue('content', decode(BlogData?.blog?.content))
   }
-}, [BlogData]);
+}, [BlogData, Categorydata, form]);
 
 
 

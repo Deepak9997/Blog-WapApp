@@ -98,7 +98,7 @@ const Addblog = () => {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("data", JSON.stringify(newValues));
-      console.log(newValues)
+      // console.log(newValues)
       const response = await fetch(`${getApiBaseUrl()}/blog/add`, {
         method: "POST",
         credentials: "include",
