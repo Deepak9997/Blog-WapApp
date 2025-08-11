@@ -57,14 +57,14 @@ const Editblog = () => {
   },[blog_id]);
 
 //  console.log(BlogData?.blog.category)
-console.log(BlogData)
+console.log(BlogData?.blog)
 
   const formSchema = z.object({
     author: z.string(),
     category: z.string(),
     title: z.string().min(3, "title must be at least 3 char"),
     slug: z.string().min(3, "slug must be at least 3 char"),
-    filecontent: z.string(),
+  filecontent: z.string().optional(),
     content: z.string().min(3, "Content must be at least 3 char"),
   });
   // 1. Define your form.
@@ -80,14 +80,15 @@ console.log(BlogData)
     },
   });
 
+
 useEffect(() => {
-  if (BlogData && Categorydata?.category?.length > 0) {
-    setPriview(BlogData?.blog?.filecontent)
-      form.setValue('category', BlogData?.blog?.category._id),
-      form.setValue('title', BlogData?.blog.title),
-      form.setValue('slug', BlogData?.blog.slug),
-      form.setValue('filecontent', filePriview),
-      form.setValue('content', decode(BlogData?.blog?.content))
+  if (BlogData && Categorydata && Categorydata.category && Categorydata.category.length > 0) {
+    setPriview(BlogData?.blog?.filecontent);
+    form.setValue('category', BlogData?.blog?.category?._id || "");
+    form.setValue('title', BlogData?.blog.title);
+    form.setValue('slug', BlogData?.blog.slug);
+    form.setValue('filecontent', BlogData?.blog?.filecontent || "");
+    form.setValue('content', decode(BlogData?.blog?.content));
   }
 }, [BlogData, Categorydata, form]);
 
@@ -109,10 +110,6 @@ useEffect(() => {
     }
   }, [blogtitle]);
 
-
-
-
-
   // 2. Define a submit handler.
 
   async function onSubmit(values) {
@@ -128,7 +125,7 @@ useEffect(() => {
       });
       const data = await response.json();
       if (!response.ok) {
-        return showToast("error", data.message);
+        showToast("error", data.message);
       }
       navegate(Routeblog)
       showToast("success", data.message);
@@ -143,6 +140,7 @@ useEffect(() => {
     const priview = URL.createObjectURL(file);
     setFile(file);
     setPriview(priview);
+    form.setValue('filecontent', file ? file.name : "");
   };
 
  if(BlogLoading) return <Loading />
@@ -162,9 +160,17 @@ useEffect(() => {
                     <FormItem>
                       <FormLabel>Category</FormLabel>
                       <FormControl>
-                        <Select onValueChange={field.onChange} value={field.value}>
+                        <Select onValueChange={field.onChange} value={form.watch('category')}>
                           <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Select Category" />
+                            <SelectValue
+                              placeholder="Select Category"
+                              // Show the selected category name
+                              children={
+                                Categorydata && Categorydata.category.length > 0
+                                  ? (Categorydata.category.find(cat => cat._id === form.watch('category'))?.name || "Select Category")
+                                  : "Select Category"
+                              }
+                            />
                           </SelectTrigger>
                           <SelectContent>
                             {Categorydata &&
@@ -175,7 +181,6 @@ useEffect(() => {
                             ) : (
                                <SelectItem value="other">other</SelectItem>
                             )}
-                           
                           </SelectContent>
                         </Select>
                       </FormControl>
