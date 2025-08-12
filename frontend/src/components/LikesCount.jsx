@@ -82,7 +82,7 @@ const LikesCount = ({ props }) => {
           Likes ? "text-red-500 " : "text-gray-300"
         }`}
       />
-      <span className="text-sm text-red-500 font-bold">
+      <span className="text-sm text-red-500 font-bold select-none">
         {LikeCount}
       </span>
     </div>
