@@ -98,7 +98,7 @@ export const UpdateComment = async (req, res, next) => {
     }
     res.status(200).json({
       success: true,
-      message:"Comment added Successfully..",
+      message:"Comment Updated Successfully..",
       category: updateComment,
     })
   } catch (error) {
