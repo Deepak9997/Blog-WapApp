@@ -135,7 +135,7 @@ const Addblog = () => {
 
   return (
     
-      <Card className="border-none mx-auto m-2 shadow-sm">
+      <Card className="border-none mx-auto m-2 shadow-sm overflow-hidden md:overflow-visible">
         <CardContent>
            <h1 className="mb-4 font-bold text-violet-500 text-3xl">AddBlog</h1>
           <Form {...form}>
