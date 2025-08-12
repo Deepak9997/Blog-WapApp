@@ -36,7 +36,7 @@ const Category = () => {
     },
     [refreshData]
   );
- console.log(Categorydata)
+ 
   const handleDelete = async (id) => {
     const response = HandleDelete(
       `${getApiBaseUrl()}/category/delete/${id}`
