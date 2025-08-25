@@ -104,11 +104,11 @@ const Comment = ({ props }) => {
         <Button asChild>
           <Link to={RouteSignin}>Sign In</Link>
         </Button>
-        <div className="mt-10">
-            <ShowComments  key={Refresh} blogid={blogid} Refresh={Refresh} setRefresh={setRefresh}  />
-        </div>
       </>
       )}
+      <div className="mt-10">
+            <ShowComments  key={Refresh} blogid={blogid} Refresh={Refresh} setRefresh={setRefresh}  />
+      </div>
     </div>
   );
 };
