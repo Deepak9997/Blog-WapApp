@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const categorySchema = new mongoose.Schema({
     role:{
         type:"string",
-        default:"user",
         enum:["User","Admin"],
+        default:"User",
         required:true,
         trim:true,
     },
