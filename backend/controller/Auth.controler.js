@@ -23,7 +23,8 @@ export const Resigter = async (req,res, next) => {
                 name,
                 email,
                 password:hashedpassword,
-                phone
+                phone,
+                role: "User"
             });
         } catch (err) {
             // Handle duplicate key error (race condition)
@@ -106,7 +107,8 @@ export const GoogleLogin = async (req,res,next) => {
                 email,
                 password:hashedpassword,
                 avatar: photoUrl,
-                phone:phoneNumber
+                phone:phoneNumber,
+                role: "User"
             });
             user = await newUser.save();
         }
