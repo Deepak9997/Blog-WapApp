@@ -27,7 +27,7 @@ const ShowComments = ({ blogid, Refresh, setRefresh }) => {
       method: "get",
       credentials: "include",
     },
-    [Refresh]
+    []
   );
   useEffect(() => {
       const interval = setInterval(() => {
