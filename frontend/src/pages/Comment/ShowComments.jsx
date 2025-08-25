@@ -68,7 +68,7 @@ const ShowComments = ({ blogid, Refresh, setRefresh }) => {
                   {comment?.author?.name}
                 </span>
               </div>
-              {comment?.author?._id === user?.user?._id ? (
+              {user?.isLoggedIn && comment?.author?._id === user?.user?._id ? (
                 <div className="Edit/delete absolute flex right-1 top-1  items-center gap-1">
                   <Button
                     className="bg-transparent w-7 h-7  border-none hover:text-violet-800"
