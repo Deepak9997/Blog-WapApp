@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use(cors({
-  origin: process.env.Frontend_URL || 'https://blog-wapapp.onrender.com' ",
+  origin: process.env.Frontend_URL || 'https://blog-wapapp.onrender.com',
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"]
