@@ -94,7 +94,7 @@ const Topbar = ({ setIsHidden }) => {
                 <Avatar >
                   <AvatarImage   src={
                     user?.user?.avatar ? user?.user?.avatar 
-                    :  <Loading />    || usericon
+                    : usericon
                       
                     }
                     referrerPolicy="no-referrer" />
