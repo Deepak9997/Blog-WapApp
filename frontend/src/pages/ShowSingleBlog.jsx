@@ -6,6 +6,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { decode } from "entities";
 import Comment from "@/components/Comment";
+import ShareBlog from "@/components/ShareBlog";
 import CommentCount from "@/components/CommentCount";
 import moment from "moment";
 import LikesCount from "@/components/LikesCount";
@@ -14,10 +15,12 @@ import RelatedBlog from "@/components/RelatedBlog";
 import { useSelector } from "react-redux";
 import { PiSubtitles } from "react-icons/pi";
 import { getApiBaseUrl } from "@/helper/APIs.js";
+import { FaShare } from "react-icons/fa";
 
 const ShowSingleBlog = () => {
   const { id } = useParams();
   const [Refresh, setRefresh] = useState();
+  const [share, setShare] = useState();
   const user = useSelector((state) => state.user);
   const {
     data: blogdata,
@@ -31,10 +34,15 @@ const ShowSingleBlog = () => {
     },
     [Refresh,id]
   );
-  // console.log(blogdata?.blog);
+
+
+  const handleShare = () => {
+     setShare(!share)
+  }
+
   if (loading) return <Loading />;
   return (
-    <div className="block xl:flex justify-between gap-5">
+    <div className="block  xl:flex justify-between gap-5">
       {/* Blog Overview */}
       <div className=" rounded w-full shadow-md xl:w-[100%] ">
         {blogdata && blogdata.blog ? (
@@ -43,7 +51,7 @@ const ShowSingleBlog = () => {
             <h1 className="text-3xl tracking-tighter flex gap-1 font-bold mb-5">
              <PiSubtitles className="text-4xl" /> {blogdata.blog.title}
             </h1>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center relative justify-between">
               <div className="avatar flex items-center gap-5">
                 <Avatar className="flex items-center justify-center pt-1">
                   <AvatarImage src={blogdata.blog.author.avatar || usericon} />
@@ -58,6 +66,8 @@ const ShowSingleBlog = () => {
                 </div>
               </div>
               <div className="flex items-center pr-2 md:pr-0 gap-5">
+                <FaShare onClick={handleShare} className="bg-white hover:bg-white text-violet-700 text-xl" />
+                {share ? <ShareBlog url={window.location.href} title={blogdata.blog.title} share={share} setShare={setShare} /> : ""}
                 <CommentCount props={{ blogid: blogdata.blog._id }} />
                 {user && user.isLoggedIn ? (
                   <LikesCount props={{ blogid: blogdata.blog._id }} />
@@ -79,7 +89,7 @@ const ShowSingleBlog = () => {
             ></div>
             <div className="border-t pt-4 border-gray-400 mt-10">
               <Comment
-                props={{ blogid: blogdata.blog._id, setRefresh: setRefresh }}
+                props={{ blogid: blogdata.blog._id, refresh:Refresh ,setrefresh: setRefresh }}
               />
             </div>
           </div>
@@ -104,3 +114,4 @@ const ShowSingleBlog = () => {
 };
 
 export default ShowSingleBlog;
+
