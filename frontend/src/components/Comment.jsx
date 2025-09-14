@@ -24,6 +24,8 @@ const Comment = ({ props }) => {
   const [Refresh, setRefresh] = useState(false);
   const user = useSelector((state) => state.user);
   const blogid = props?.blogid;
+  const setrefresh = props?.setrefresh
+  const refresh = props?.refresh
 
   const formSchema = z.object({
     comment: z.string().min(3, "Comment must be at least 3 characters"),
@@ -58,6 +60,7 @@ const Comment = ({ props }) => {
       }
       form.reset();
       setRefresh(!Refresh);
+      setrefresh(!refresh)
       showToast("success", data.message);
     } catch (error) {
       showToast("error", error.message);
@@ -97,17 +100,20 @@ const Comment = ({ props }) => {
               </div>
             </form>
           </Form>
-          
+          {/* <div className="mt-10">
+            <ShowComments  key={Refresh} blogid={blogid} Refresh={Refresh} setRefresh={setRefresh}  />
+          </div> */}
         </>
       ) : (
-      <>
-        <Button asChild>
-          <Link to={RouteSignin}>Sign In</Link>
-        </Button>
-      </>
+        <>
+            <Button asChild>
+              <Link to={RouteSignin}>Sign In</Link>
+            </Button>
+            
+        </>
       )}
       <div className="mt-10">
-            <ShowComments  key={Refresh} blogid={blogid} Refresh={Refresh} setRefresh={setRefresh}  />
+                <ShowComments  key={refresh} blogid={blogid} Refresh={refresh} setRefresh={setrefresh} />
       </div>
     </div>
   );
