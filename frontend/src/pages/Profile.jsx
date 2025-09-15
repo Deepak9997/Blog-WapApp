@@ -105,7 +105,7 @@ const Profile = () => {
   if(loading) return <Loading />
   return (
     <div>
-      <Card className=" w-full border-none relative mx-auto">  
+      <Card className="border-none mx-auto m-2 shadow-sm">  
         <CardContent>
           <div className="flex  justify-center items-center mt-10">
             <Dropzone onDrop={(acceptedFiles) => handleuploadFile(acceptedFiles)}>
