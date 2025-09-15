@@ -35,7 +35,7 @@ export function AppSidebar() {
   const [active, setActive] = useState(null);
 
   return (
-    <div className="w-0 md:w-40">
+    <div className="w-0 md:w-40 mr-2">
       <Sidebar
         className={`fixed border-none z-30 md:static top-0 left-0  bg-white transition-transform duration-30  ease-in-out md:translate-x-0 md:w-[200px] w-[220px]`}
       >
