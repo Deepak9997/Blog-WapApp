@@ -92,7 +92,7 @@ const Topbar = ({ setIsHidden }) => {
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Avatar >
-                  <AvatarImage   src={
+                  <AvatarImage className='border-3 border-gray-400 p-[0.7px] rounded-full hover:border-violet-500'  src={
                     user?.user?.avatar ? user?.user?.avatar 
                     : usericon
                       
