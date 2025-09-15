@@ -21,7 +21,7 @@ const index = () => {
       // console.log(blogdata)
       if(loading) return <Loading />
     return (
-        <Card className="border-none shadow-none">
+        <Card className="border-none mx-auto m-2 shadow-none">
             <CardContent className="m-0 p-0 md:px-5">
                 <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4  gap-5'>
                   {blogdata && blogdata.blog.length > 0  ?
