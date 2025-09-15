@@ -54,7 +54,7 @@ const BlogCard = ({ props }) => {
           <span>{moment(props.createdAt).format("MMMM Do YYYY")}</span>
         </div>
         <h4 className="text-md tracking-tighter font-bold">{props.title}</h4>
-        <p className="text-sm ">{getFirstWords(decode(props.content), 0, 5)}</p>
+{/*         <p className="text-sm ">{getFirstWords(decode(props.content), 0, 5)}</p> */}
       </div>
     </Link>
   );
