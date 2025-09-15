@@ -121,7 +121,7 @@
 
 /* Webkit-based browsers (Chrome, Edge, Safari) */
 .scrollbar::-webkit-scrollbar {
-  width: 8px;
+  width: 0px;
 }
 
 .scrollbar::-webkit-scrollbar-track {
