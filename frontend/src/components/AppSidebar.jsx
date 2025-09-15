@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import { useFetch } from "@/hooks/useFetch";
 import { RouteBlogByCategory, RouteCategory, RouteUsers } from "@/helper/routes";
 import { getApiBaseUrl } from "@/helper/APIs.js";
+import { useState } from "react";
 
 export function AppSidebar() {
   const user = useSelector((state) => state.user);
@@ -31,11 +32,12 @@ export function AppSidebar() {
     method: "get",
     credentials: "include",
   });
+  const [active, setActive] = useState(null);
 
   return (
-    <div className="w-0 md:w-50">
+    <div className="w-0 md:w-40">
       <Sidebar
-        className={`fixed border-none z-30 md:static top-0 left-0  bg-white transition-transform duration-300 scrollbar ease-in-out md:translate-x-0 md:w-[220px] w-[220px]`}
+        className={`fixed border-none z-30 md:static top-0 left-0  bg-white transition-transform duration-30  ease-in-out md:translate-x-0 md:w-[200px] w-[220px]`}
       >
         <SidebarHeader className="bg-white">
           <img src={logo} alt="" width={100} />
@@ -46,15 +48,27 @@ export function AppSidebar() {
               {/* home */}
               <SidebarMenuItem>
                 <SidebarMenuButton className="hover:text-violet-500">
+                  <Link
+                    to="/"
+                    className={active === "home" ? "flex  gap-2 items-center text-violet-500" : "flex  gap-2 items-center text-gray-700"}
+                    onClick={() => setActive("home")}
+                  >
                   <IoHomeOutline />
-                  <Link to="/">Home</Link>
+                    Home
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* Blogs */}
               <SidebarMenuItem>
                 <SidebarMenuButton className="hover:text-violet-500">
                   <GrBlog />
-                  <Link to="/Blogs"> Blogs</Link>
+                  <Link
+                    to="/Blogs"
+                    className={active === "blogs" ? "flex  gap-2 items-center text-violet-500" : "flex  gap-2 items-center text-gray-700"}
+                    onClick={() => setActive("blogs")}
+                  >
+                    Blogs
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               {/* Comments */}
@@ -70,18 +84,30 @@ export function AppSidebar() {
                   <SidebarMenuItem>
                     <SidebarMenuButton className="hover:text-violet-500">
                       <TbCategory />
-                      <Link to={RouteCategory}> Category</Link>
+                      <Link
+                        to={RouteCategory}
+                        className={active === "category" ? "flex  gap-2 items-center text-violet-500" : "flex  gap-2 items-center text-gray-700"}
+                        onClick={() => setActive("category")}
+                      >
+                        Category
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
 
               {user && user?.user?.role && user?.user?.role === "Admin" && (
-                  <SidebarMenuItem>
-                    <SidebarMenuButton className="hover:text-violet-500">
-                      <FaRegUser />
-                      <Link to={RouteUsers}> User</Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                )} 
+                <SidebarMenuItem>
+                  <SidebarMenuButton className="hover:text-violet-500">
+                    <FaRegUser />
+                    <Link
+                      to={RouteUsers}
+                      className={active === "user" ? "flex  gap-2 items-center text-violet-500" : "flex  gap-2 items-center text-gray-700"}
+                      onClick={() => setActive("user")}
+                    >
+                      User
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
                 
             </SidebarMenu>
           </SidebarGroup>
@@ -96,6 +122,8 @@ export function AppSidebar() {
                     <Link
                       key={category?._id}
                       to={RouteBlogByCategory(category._id)}
+                      className={active === category._id ? "text-violet-500" : "text-gray-700"}
+                      onClick={() => setActive(category._id)}
                     >
                       <span># </span> {category?.name}
                     </Link>
